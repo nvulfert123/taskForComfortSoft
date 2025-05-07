@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.validators;
 
 import com.example.demo.exceptions.InvalidDataException;
 import lombok.extern.slf4j.Slf4j;

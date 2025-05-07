@@ -2,8 +2,8 @@ package com.example.demo.service;
 
 
 import com.example.demo.exceptions.InvalidDataException;
-import com.example.demo.util.FileValidator;
-import com.example.demo.util.NumbersValidator;
+import com.example.demo.validators.FileValidator;
+import com.example.demo.validators.NumbersValidator;
 import com.example.demo.util.XlsxFileProcessor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
