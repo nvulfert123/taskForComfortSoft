@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 @Slf4j
 @Component
 public class NthMinFinder {
-    public static int findNthMinimum(List<Integer> numbers, int n) {
+    public int findNthMinimum(List<Integer> numbers, int n) {
 
         log.debug("Finding {}-th minimum in list of {} numbers", n, numbers.size());
 

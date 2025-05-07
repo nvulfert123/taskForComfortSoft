@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.service.DataProcessingService;
 import com.example.demo.service.NthMinFinder;
-import com.example.demo.util.FileValidator;
-import com.example.demo.util.NumbersValidator;
-import com.example.demo.util.XlsxFileProcessor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -34,10 +29,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Поиск N-ого минимума", description = "API для поиска N-го минимального значения в *.xlsx файле")
 public class NthMinController {
-
-    private final FileValidator fileValidator;
-    private final XlsxFileProcessor xlsxProcessor;
-    private final NumbersValidator numbersValidator;
+    private final DataProcessingService dataProcessingService;
+    private final NthMinFinder nthMinFinder;
 
     @Operation(
             summary = "Найти N-й минимум",
@@ -88,15 +81,8 @@ public class NthMinController {
 
         log.info("Processing request for file: {}, N: {}", filePath, n);
 
-        Path path = Paths.get(filePath).normalize();
+        List<Integer> numbers = dataProcessingService.processInput(filePath, n);
 
-        fileValidator.validatePath(path);
-        File file = path.toFile();
-        fileValidator.validateFile(file);
-
-        List<Integer> numbers = xlsxProcessor.readNumbers(path);
-        numbersValidator.validate(n, numbers);
-
-        return ResponseEntity.ok(NthMinFinder.findNthMinimum(numbers, n));
+        return ResponseEntity.ok(nthMinFinder.findNthMinimum(numbers, n));
     }
 }
