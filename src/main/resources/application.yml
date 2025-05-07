@@ -1,0 +1,15 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: demo
+logging:
+  level:
+    org.springframework.web: "debug"
+server:
+  address: 0.0.0.0
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
